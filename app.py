@@ -43,7 +43,7 @@ def predict():
     # Capture frame from webcam
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
-    #cap.release()
+    cap.release()
 
     # Convert the frame to binary
     _, image = cv2.imencode('.jpg', frame)
