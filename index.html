@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender and Age Detection</title>
+</head>
+<body>
+    <h1>Gender and Age Detection</h1>
+    <div id="predictions"></div>
+
+    <script>
+        function getPredictions() {
+            fetch('/predict')
+                .then(response => response.json())
+                .then(data => {
+                    const predictionsDiv = document.getElementById('predictions');
+                    predictionsDiv.innerHTML = `
+                        <p>Gender: ${data.gender}</p>
+                        <p>Age: ${data.age}</p>
+                    `;
+                })
+                .catch(error => console.error('Error fetching predictions:', error));
+        }
+
+        setInterval(getPredictions, 1000); // Update predictions every second
+    </script>
+</body>
+</html>
