@@ -8,6 +8,7 @@
 <body>
     <h1>Gender and Age Detection</h1>
     <div id="predictions"></div>
+    <iframe id="webcam" src="http://192.168.2.219:8080/video" width="1200" height="1080" frameborder="0" allowfullscreen></iframe>
 
     <script>
         function getPredictions() {
@@ -23,7 +24,8 @@
                 .catch(error => console.error('Error fetching predictions:', error));
         }
 
-        setInterval(getPredictions, 1000); // Update predictions every second
+        // Call getPredictions function every second
+        setInterval(getPredictions, 1000);
     </script>
 </body>
 </html>
