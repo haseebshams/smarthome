@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template
 import cv2
 import requests
+import numpy as np
 import json
 
 app = Flask(__name__)
@@ -43,14 +44,16 @@ def predict():
     # Capture frame from webcam
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
-    cap.release()
 
     # Convert the frame to binary
-    _, image = cv2.imencode('.jpg', frame)
-    image_data = image.tobytes()
+    _, buffer = cv2.imencode('.jpg', frame)
+    image_data = buffer.tobytes()
 
     # Detect gender and age
     gender, age = detect_gender_age(image_data)
+
+    # Release the camera
+    cap.release()
 
     # Return JSON response
     return jsonify({"gender": gender, "age": age})
